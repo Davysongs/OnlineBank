@@ -4,6 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+django = "*"
+django-rest-framework = "*"
+django-crispy-forms = "*"
+requests = "*"
+pytest = "*"
+django-debug-toolbar = "*"
+mysqlclient = "*"
 
 [dev-packages]
 
