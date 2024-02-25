@@ -1,3 +1,4 @@
+{%load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top-Choice Bank || Dash Board</title>
-    <link rel="stylesheet" href="./CSS/dashboard.css">
-    <link rel="stylesheet" href="./CSS/all.min.css">
+    
+    <link rel="stylesheet" href="{% static 'CSS/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/all.min.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <link rel="icon" href="">
 </head>
@@ -18,7 +20,7 @@
         <nav class="dash-nav">
             <ul>
                 <li><a href="./index.html" class="dash-logo">
-                    <img src="./Img/logo.png" alt="myLogo">
+                    <img src="{% static 'Img/logo.png' %}" alt="myLogo">
                     <span class="nav-item">TOP-CHOICE BANK</span>
                 </a></li>
                 
@@ -42,7 +44,7 @@
                     <span class="nav-item">Withdraw</span>
                 </a></li>
 
-                <li><a href="./index.html" class="logout" id="logout">
+                <li><a href="{% url 'home' %}" class="logout" id="logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <span class="nav-item">Logout</span>
                 </a></li>
@@ -157,7 +159,7 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./dashboard.js"></script>
+    <script src="{% static 'scripts/dashboard.js' %}"></script>
 
     
 </body>
