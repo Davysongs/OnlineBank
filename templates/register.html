@@ -17,7 +17,7 @@
     <header class="container" id="register">
         <nav class="nav">
             <div class="logo">
-                <a href="./index.html"><img src="./Img/logo.png" alt="logo"></a> 
+                <a href="./index.html"><img src="{% static 'Img/logo.png' %}" alt="logo"></a> 
                <a href="./index.html"><h2>Top-Choice Bank</h2></a>
             </div>
 
@@ -30,7 +30,7 @@
             <div class="nav-links">
                 <div class="menu">
                      <ul>
-                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="{% url 'home' %}">Home</a></li>
                         <li><a href="./index.html#features">Features</a></li>
                         <li><a href="./index.html#company">Company</a></li>
                         <li><a href="./index.html#contact">Contact</a></li>
@@ -87,7 +87,7 @@
             <button type="submit" id="submit">REGISTER</button>
 
             <div class="login-bottom-text">
-                <p>Already have an account? <span><a href="./login.html">LOGIN</a></span> </p>
+                <p>Already have an account? <span><a href="{% url 'login' %}">LOGIN</a></span> </p>
             </div>
 
 
@@ -98,7 +98,7 @@
         </div>
     </header>
     
-    <script src="./register.js"></script>
+    <script src="{% static 'scripts/register.js' %}"></script>
 
     
 </body>

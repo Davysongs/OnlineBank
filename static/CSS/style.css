@@ -198,18 +198,6 @@ nav:hover .logo h2{
     display: none;
 }
 
-#preloader{
-    background: var(--white-color) url(/image/preloader.gif);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 10%;
-    width: 100%;
-    height: 100vh;
-    z-index: 99999;
-    position: fixed;
-}
-
-
 /* SECTIONS */
 .section2{
     margin-top: 8%;

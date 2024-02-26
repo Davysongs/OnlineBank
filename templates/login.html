@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top-Choice Bank || Login Page</title>
-    <link rel="stylesheet" href="./CSS/login.css">
-    <link rel="stylesheet" href="./CSS/all.min.css">
+    <link rel="stylesheet" href="{% static 'CSS/login.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/all.min.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <link rel="icon" href="">
 </head>
@@ -15,8 +16,8 @@
     <header class="container">
         <nav class="nav">
             <div class="logo">
-                <a href="./index.html"><img src="./Img/logo.png" alt="logo"></a> 
-                <a href="./index.html"><h2>Top-Choice Bank</h2></a>
+                <a href="{% url 'home' %}"><img src="{% static 'Img/logo.png' %}" alt="logo"></a> 
+                <a href="{% url 'home' %}"><h2>Top-Choice Bank</h2></a>
             </div>
 
             <div class="toggle">
@@ -27,7 +28,7 @@
             <div class="nav-links">
                 <div class="menu">
                     <ul>
-                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="{% url 'home' %}">Home</a></li>
                         <li><a href="./index.html#features">Features</a></li>
                         <li><a href="./index.html#company">Company</a></li>
                         <li><a href="./index.html#contact">Contact</a></li>
@@ -68,12 +69,12 @@
         <button type="submit" id="submit">LOGIN</button>
             
         <div class="register-bottom-text">
-            <p>Don't have an account? <span><a href="./register.html">REGISTER</a></span> </p>
+            <p>Don't have an account? <span><a href="{% url 'register' %}">REGISTER</a></span> </p>
         </div>
     </form>
     </header>
     
-    <script src="./login.js"></script>
+    <script src="{% static 'scripts/login.js' %}"></script>
 
 
 
