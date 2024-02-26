@@ -7,7 +7,8 @@ STAT = (
 )
 # Create your models here.
 class Trans(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=120)
+    bank = models.CharField(max_length=50)
     account_no = models.CharField(max_length=10)
     amount = models.IntegerField()
     date = models.DateTimeField(auto_now_add = True, help_text = "time of transaction")
