@@ -54,7 +54,7 @@
 
         <section class="main">
             <div class="main-top">
-                <h2>Welcome to your Dashboard, <span id="name"></span></h2>
+                <h2>Welcome to your Dashboard, <span id="name">{{ context.user }}</span></h2>
                 <!-- <i class="fas fa-user-cog"></i> -->
                 <h3>Acc no: <span id="acc-no"></span></h3>
             </div>
@@ -69,7 +69,7 @@
 
                     <div class="popup" id="popup-balance">
                         <i class="fas fa-times cancel-pop1"></i>
-                        <p class="amount">Your Balance is: $0</p>
+                        <p class="amount">Your Balance is: {{ context.balance }}</p>
                         <button type="button" id="close-popup">OK</button>
                     </div>
                 </div>

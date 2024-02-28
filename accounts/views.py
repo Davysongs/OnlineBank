@@ -5,7 +5,7 @@ from django.contrib import messages
 #login 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('dashboard')
     else:
         if request.method == "POST":
             username = request.POST.get("username")
@@ -13,13 +13,13 @@ def login_view(request):
             user = authenticate(request, username= username, password= password)
             if user is not None:
                 login(request,user)
-                return redirect("home")
+                return redirect("dashboard")
             else:
                 messages.info(request,"Username or password is incorrect")
                 return render(request, "login.html")
         return render(request, "login.html")
 
-
+#sign up view
 def register_view(request):
     return render(request, "register.html")
 
