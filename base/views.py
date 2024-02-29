@@ -17,7 +17,6 @@ def dashboard(request):
             return render(request, "dashboard.html", {'context':details})
         except:
             #User have not finished account creation then redirect to account registration
-            return render(request,"profile.html" )
-
+            return render(request,"dashboard.html" )
     return render(request, "dashboard.html")
 

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'accounts',
     'base',
     'transactions',
+    'django_use_email_as_username.apps.DjangoUseEmailAsUsernameConfig',
+    'custom_user.apps.CustomUserConfig',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'base.middlewares.CustomErrorHandlerMiddleware',
+    'base.middlewares.AuthenticatedRedirectMiddleware',
     'base.middlewares.AjaxMiddleware',
 ]
 
@@ -138,3 +141,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = "login"
 LOGOUT_URL = "logout"
+AUTH_USER_MODEL = 'custom_user.User'
