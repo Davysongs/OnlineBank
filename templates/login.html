@@ -42,36 +42,37 @@
                 </div>
         </nav>
 
-        <form action="./login.html#" class="form">
-        <div class="login-top-text">
-            <h2>WELCOME BACK!</h2>
-            <p>We are happy to have you back at <br> Top-Choice Bank.</p>
-        </div>
-        <h2 class="login-error"></h2>
-        <h2 class="login">LOGIN</h2>
+        <form class="form" method="POST">
+            {% csrf_token %}
+            <div class="login-top-text">
+                <h2>WELCOME BACK!</h2>
+                <p>We are happy to have you back at <br> Top-Choice Bank.</p>
+            </div>
+            <h2 class="login-error"></h2>
+            <h2 class="login">LOGIN</h2>
 
-        <div class="input-email">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" class="email" placeholder="Email" autocomplete="off">
-            <span class="email-granted"></span>
-            <span class="email-error"></span>
-        </div>
+            <div class="input-email">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="email" placeholder="Email" autocomplete="off">
+                <span class="email-granted"></span>
+                <span class="email-error"></span>
+            </div>
 
-        <div class="input-password">
-            <label for="password">Password</label>
-            <input type="password" class="pass" name="password" id="password" placeholder="Password" autocomplete="off">
-            <i class="fas fa-eye open-eye"></i>
-            <i class="fas fa-eye-slash close-eye"></i>
-            <span class="pass-granted"></span>
-            <span class="pass-error"></span>
-        </div>
-        
-        <button type="submit" id="submit">LOGIN</button>
+            <div class="input-password">
+                <label for="password">Password</label>
+                <input type="password" class="pass" name="password" id="password" placeholder="Password" autocomplete="off">
+                <i class="fas fa-eye open-eye"></i>
+                <i class="fas fa-eye-slash close-eye"></i>
+                <span class="pass-granted"></span>
+                <span class="pass-error"></span>
+            </div>
             
-        <div class="register-bottom-text">
-            <p>Don't have an account? <span><a href="{% url 'register' %}">REGISTER</a></span> </p>
-        </div>
-    </form>
+            <button type="submit" id="submit">LOGIN</button>
+                
+            <div class="register-bottom-text">
+                <p>Don't have an account? <span><a href="{% url 'register' %}">REGISTER</a></span> </p>
+            </div>
+        </form>
     </header>
     
     <script src="{% static 'scripts/login.js' %}"></script>
