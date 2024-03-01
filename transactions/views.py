@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from accounts.models import Account
 from django.http import JsonResponse
 import json
@@ -40,7 +39,7 @@ def deposit(request):
     else:
         return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
     
-    
+
 def withdraw(request):
     pass
 def transfer(request):
