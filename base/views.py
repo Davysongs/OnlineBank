@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from accounts.models import Account
 from transactions.models import Trans
 from login_required import login_not_required
@@ -8,7 +8,6 @@ from login_required import login_not_required
 def homepage(request):
     return render(request, "index.html")
 
-@login_not_required
 def dashboard(request):
     if request.method == "GET":
         try:
@@ -17,6 +16,11 @@ def dashboard(request):
             return render(request, "dashboard.html", {'context':details})
         except:
             #User have not finished account creation then redirect to account registration
-            return render(request,"dashboard.html" )
+            return redirect('profile')
     return render(request, "dashboard.html")
+
+def profile(request):
+    if request.method == "GET":
+        return render(request, "profile.html")
+
 

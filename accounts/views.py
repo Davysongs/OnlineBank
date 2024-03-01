@@ -23,6 +23,11 @@ def login_view(request):
 #sign up view
 @login_not_required
 def register_view(request):
+    #store temporary data input
+    #show link has been sent to your email
+    #execute email verifivation 
+    #take the user to the login view after email verification is complete
+
     return render(request, "register.html")
 
 #Logout
