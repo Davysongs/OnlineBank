@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'accounts',
     'base',
     'transactions',
+    'django_use_email_as_username.apps.DjangoUseEmailAsUsernameConfig',
+    'custom_user.apps.CustomUserConfig',
 ]
 
 MIDDLEWARE = [
@@ -48,8 +50,12 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'login_required.middleware.LoginRequiredMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'base.middlewares.CustomErrorHandlerMiddleware',
+    'base.middlewares.AuthenticatedRedirectMiddleware',
+    'base.middlewares.AjaxMiddleware',
 ]
 
 ROOT_URLCONF = 'BankSite.urls'
@@ -131,3 +137,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGIN_URL = "login"
+LOGOUT_URL = "logout"
+AUTH_USER_MODEL = 'custom_user.User'

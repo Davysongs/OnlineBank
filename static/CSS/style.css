@@ -573,7 +573,7 @@ nav:hover .logo h2{
     background-color: var(--toggle-color);
     z-index: 2;
     overflow-x: hidden;
-    transition: all 1s ease-in;
+    transition: all 12s ease-in;
 }
 
 .menu ul{
@@ -644,9 +644,14 @@ nav:hover .logo h2{
 }
 
 .section1{
-    padding: 200px 22%;
-    padding-top: 280px;
+    /* padding: 200px 22%; */
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
     text-align: center;
+    height: 100vh;
 }
 
 .section1 h2{

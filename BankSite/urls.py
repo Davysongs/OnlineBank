@@ -19,6 +19,7 @@ from django.urls import path, include
 # Wire up our API with the proper URL routing.
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('base.urls')), # The home page is in base
+    path('', include('base.urls')),
     path('auth/', include('accounts.urls')),
+    path('trans/',include('transactions.urls')),
 ]

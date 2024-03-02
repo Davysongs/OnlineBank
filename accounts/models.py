@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model 
+from django.contrib.auth.hashers import make_password, check_password
 
 
 # Create your models here.
@@ -18,5 +19,21 @@ class Account(models.Model):
     country = models.CharField(blank = False, max_length = 200)
     postcode = models.CharField(blank = False, max_length = 200)
     state = models.CharField(blank = False, max_length=200)
+    pin = models.CharField(max_length=128,help_text="4 digit PIN for transaction verification.")
+
+    def set_pin(self, pin):
+        # Hash the PIN before storing it
+        self.pin = make_password(pin)
+
+    def check_pin(self, pin):
+        # Check if the provided PIN matches the hashed PIN
+        return check_password(pin, self.pin)
+
+    def save(self, *args, **kwargs):
+        # Hash the PIN before saving the model instance
+        if self.pin:
+            self.set_pin(self.pin)
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return self.name 

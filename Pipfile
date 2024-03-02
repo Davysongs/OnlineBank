@@ -12,6 +12,8 @@ pytest = "*"
 django-debug-toolbar = "*"
 mysqlclient = "*"
 pillow = "*"
+django-login-required-middleware = "*"
+django-use-email-as-username = "*"
 
 [dev-packages]
 
