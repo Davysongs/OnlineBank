@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'CSS/login.css' %}">
     <link rel="stylesheet" href="{% static 'CSS/all.min.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-    <link rel="icon" href="">
+    <link rel="icon" href="{% static 'Img/t.svg' %}">
 </head>
 <body>
 
@@ -29,17 +29,12 @@
                 <div class="menu">
                     <ul>
                         <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="./index.html#features">Features</a></li>
-                        <li><a href="./index.html#company">Company</a></li>
-                        <li><a href="./index.html#contact">Contact</a></li>
+                        <li><a href="{% url 'home' %}#features">Features</a></li>
+                        <li><a href="{% url 'home' %}#company">Company</a></li>
+                        <li><a href="{% url 'home' %}#contact">Contact</a></li>
                     </ul>
                 </div>
-
-                <div class="sign">
-                    <a href="./login.html">Login</a>
-                    <a href="./register.html">Register</a>
-                </div>
-                </div>
+            </div>
         </nav>
 
         <form class="form" method="POST">

@@ -8,11 +8,12 @@
 <meta name="Description" content="Enter your description here"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
-<title>{{ context.user }} | Profile</title>
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<title>{{ context.username }} | Profile</title>
 </head>
 <body>
-    <h1>Hey {{ context.user }} </h1>
+    <h1>Profile update page  {{ context.username }} </h1>
+    <a href="{% url 'logout' %}">LOGOUT</a>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

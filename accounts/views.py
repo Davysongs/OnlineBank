@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from login_required import login_not_required
+from accounts.forms import SignUpForm
+
 
 # Create your views here.
 #login 
@@ -27,6 +29,21 @@ def register_view(request):
     #show link has been sent to your email
     #execute email verifivation 
     #take the user to the login view after email verification is complete
+    form = SignUpForm()
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        context = {"form" : form}
+        if form.is_valid():
+            form.save()
+            # Set a flag to indicate successful registration
+            condition = True
+            return render(request, "register.html", {'condition': condition})
+        return render(request, "register.html", context)
+    elif request.method == "GET":
+        context = {"form" : form}
+        return render(request, "register.html", context)
+    
+
 
     return render(request, "register.html")
 

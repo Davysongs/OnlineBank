@@ -13,16 +13,17 @@
     --black-opaque-color: #000000bb;
     --hover-color: #0000ff98;
     --button-color: #ffe3ffC2;
-    --button-color: #dd5c92c2;
+    --button-color: #5c5eddc2;
     --error--color: #e00f0f;
     --toggle-color: #ffe3fff1;
+    --background: rgb(214, 214, 214)
 }
 
 
 .container{
     width: 100%;
     height: 100vh;
-    background-color: rgb(214, 214, 214);
+    background-color:var(--background) ;
     background-position: top;
     background-size: cover;
     overflow-y: hidden;
@@ -153,7 +154,7 @@ nav:hover .logo h2{
 
 form{
     width: 380px;
-    height: 75vh;
+    height: 80vh;
     display: block;
     justify-content: center;
     background-color: var(--white-color);
@@ -162,7 +163,7 @@ form{
     margin: 50px auto;
     margin-top: 150px;
     border-radius: 15px;
-    box-shadow: 0px 0px 10px 17px rgba(0,0,0,0.72);
+    box-shadow: 0px 0px 10px 17px rgba(55, 52, 52, 0.72);
     -webkit-box-shadow: 0px 0px 10px 17px rgba(0,0,0,0.72);
     -moz-box-shadow: 0px 0px 10px 17px rgba(0,0,0,0.72);
 }
@@ -525,10 +526,9 @@ nav:hover .logo h2{
 
 form{
     width: 400px;
-    height: 90vh;
+    height: 80vh;
     display: block;
     justify-content: center;
-    background-color: var(--button-color);
     margin: 50px auto;
     border-radius: 15px;
     margin-top: 150px;
@@ -645,7 +645,6 @@ form button{
     height: 80vh;
     display: block;
     justify-content: center;
-    background-color: var(--button-color);
     margin: 50px auto;
     border-radius: 15px;
     margin-top: 150px;
@@ -1032,4 +1031,176 @@ form button{
     margin-bottom: 10px;
     margin-right: 45px;
 }
+}
+
+/* success toggle */
+.success-checkmark {
+    width: 80px;
+    height: 115px;
+    margin: 0 auto;
+    
+    .check-icon {
+        width: 80px;
+        height: 80px;
+        position: relative;
+        border-radius: 50%;
+        box-sizing: content-box;
+        border: 6px solid rgba(0, 0, 0, 0.988);
+        
+        &::before {
+            top: 3px;
+            left: -2px;
+            width: 30px;
+            transform-origin: 100% 50%;
+            border-radius: 100px 0 0 100px;
+        }
+        
+        &::after {
+            top: 0;
+            left: 30px;
+            width: 60px;
+            transform-origin: 0 50%;
+            border-radius: 0 100px 100px 0;
+            animation: rotate-circle 4.25s ease-in;
+        }
+        
+        &::before, &::after {
+            content: '';
+            height: 100px;
+            position: absolute;
+            background: var(--background);
+            transform: rotate(-45deg);
+        }
+        
+        .icon-line {
+            height: 5px;
+            background-color: rgb(12, 156, 82);
+            display: block;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+            
+            &.line-tip {
+                top: 46px;
+                left: 14px;
+                width: 25px;
+                transform: rotate(45deg);
+                animation: icon-line-tip 0.75s;
+            }
+            
+            &.line-long {
+                top: 38px;
+                right: 8px;
+                width: 47px;
+                transform: rotate(-45deg);
+                animation: icon-line-long 0.75s;
+            }
+        }
+        
+        .icon-circle {
+            top: -4px;
+            left: -4px;
+            z-index: 10;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            position: absolute;
+            box-sizing: content-box;
+            border: 4px solid rgb(15, 165, 88);
+        }
+        
+        .icon-fix {
+            top: 8px;
+            width: 5px;
+            left: 26px;
+            z-index: 1;
+            height: 85px;
+            position: absolute;
+            transform: rotate(-45deg);
+            background-color: var(--background);
+        }
+    }
+}
+
+@keyframes rotate-circle {
+    0% {
+        transform: rotate(-45deg);
+    }
+    5% {
+        transform: rotate(-45deg);
+    }
+    12% {
+        transform: rotate(-405deg);
+    }
+    100% {
+        transform: rotate(-405deg);
+    }
+}
+
+@keyframes icon-line-tip {
+    0% {
+        width: 0;
+        left: 1px;
+        top: 19px;
+    }
+    54% {
+        width: 0;
+        left: 1px;
+        top: 19px;
+    }
+    70% {
+        width: 50px;
+        left: -8px;
+        top: 37px;
+    }
+    84% {
+        width: 17px;
+        left: 21px;
+        top: 48px;
+    }
+    100% {
+        width: 25px;
+        left: 14px;
+        top: 45px;
+    }
+}
+
+@keyframes icon-line-long {
+    0% {
+        width: 0;
+        right: 46px;
+        top: 54px;
+    }
+    65% {
+        width: 0;
+        right: 46px;
+        top: 54px;
+    }
+    84% {
+        width: 55px;
+        right: 0px;
+        top: 35px;
+    }
+    100% {
+        width: 47px;
+        right: 8px;
+        top: 38px;
+    }
+}
+#success{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; 
+}
+#first-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; 
+}
+
+.success-checkmark {
+    width: 100px; 
+    height: 100px; 
 }

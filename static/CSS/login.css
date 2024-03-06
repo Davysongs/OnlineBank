@@ -19,7 +19,7 @@
     --black-opaque-color: #000000bb;
     --hover-color: #0000ff98;
     --button-color: #ffe3ffC2;
-    --button-color: #dd5c92c2;
+    --button-color: #5c5eddc2;
     --error--color: #e00f0f;
     --toggle-color: #ffe3fff1;
 }
@@ -688,7 +688,6 @@ form label{
     height: 75vh;
     display: block;
     justify-content: center;
-    background-color: var(--button-color);
     margin: 50px auto;
     border-radius: 15px;
 }
@@ -827,7 +826,6 @@ form button{
     height: 75vh;
     display: block;
     justify-content: center;
-    background-color: var(--button-color);
     margin: 50px auto;
     border-radius: 15px;
 }
