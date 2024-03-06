@@ -337,7 +337,6 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--button-color);
     transition: background-color .5s;
     z-index: 10;
 }
@@ -462,7 +461,6 @@ form{
     height: 75vh;
     display: block;
     justify-content: center;
-    background-color: var(--button-color);
     margin: 50px auto;
     border-radius: 15px;
 }
@@ -573,7 +571,6 @@ form button{
     height: 72vh;
     display: block;
     justify-content: center;
-    background-color: var(--button-color);
     margin: 50px auto;
     border-radius: 15px;
 }

@@ -5,11 +5,11 @@ success.style.display= "none"
 for (var field in form_fields){	
     form_fields[field].className += ' form-control'
 }
-const form = document.getElementById('register-form');
-const passwordInput = form.querySelector('input[name="password1"]');
-const confirmPasswordInput = form.querySelector('input[name="password2"]');
-const emailInput = form.querySelector('input[name="email"]');
-const passwordStrength = document.getElementById('password-strength');
+const form = document.getElementById('register-form')
+const passwordInput = form.querySelector('input[name="password1"]')
+const confirmPasswordInput = form.querySelector('input[name="password2"]')
+const emailInput = form.querySelector('input[name="email"]')
+const passwordStrength = document.getElementById('password-strength')
 
 form.addEventListener('submit', function (event) {
     let password = passwordInput.value;
@@ -69,3 +69,37 @@ close_eye.addEventListener('click', function(){
     }
  
  })
+
+
+ document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('register-form');
+
+    form.addEventListener('submit', function(event) {
+        // Prevent default form submission
+        event.preventDefault();
+
+        // Get form input values
+        const firstName = document.getElementById('first-name').value.trim();
+        const lastName = document.getElementById('last-name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const password1 = document.getElementById('password1').value.trim();
+        const password2 = document.getElementById('password2').value.trim();
+
+        // Perform client-side validation
+        if (firstName === '' || lastName === '' || email === '' || username === '' || password1 === '' || password2 === '') {
+            // Show error message for empty fields
+            document.querySelector('.register-error').textContent = 'All fields are required.';
+            return; // Prevent further execution
+        }
+
+        // If passwords do not match, show error message
+        if (password1 !== password2) {
+            document.querySelector('.register-error').textContent = 'Passwords do not match.';
+            return; // Prevent further execution
+        }
+
+        // If all validations pass, submit the form
+        form.submit();
+    });
+});
