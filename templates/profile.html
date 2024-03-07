@@ -60,10 +60,13 @@
             <input type="text" name="state" id="state" required>
         </div>
         <div class="input-group">
-            <label for="pin">PIN</label><br>
-            <input type="password" name="pin" id="pin" maxlength="4" autocomplete="off" required>
-            <small>4-digit PIN for transaction verification.</small>
-            <span id="pin-error" class="error-message"></span>
+            <label for="pin1">PIN</label><small> 4-digit PIN for transaction verification.</small><br>
+            <span id="pin-error" class="error-message"></span><br>
+                <input type="password" name="pin1" id="pin1" maxlength="4" autocomplete="off" required>
+        </div>
+        <div class="input-group">
+            <label for="pin2">Confirm PIN</label><br>
+            <input type="password" name="pin2" id="pin2" maxlength="4" autocomplete="off" required>
         </div>
         <button type="submit">Submit</button>
     </form>

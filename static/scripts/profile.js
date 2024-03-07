@@ -19,17 +19,29 @@ document.addEventListener('DOMContentLoaded', function() {
         const country = document.getElementById('country').value.trim();
         const postcode = document.getElementById('postcode').value.trim();
         const state = document.getElementById('state').value.trim();
-        const pin = document.getElementById('pin').value.trim();
+        const pin1 = document.getElementById('pin1').value.trim();
+        const pin2 = document.getElementById('pin2').value.trim();
+        var pinError = document.getElementById('pin-error')
 
         // Validate numeric inputs
-        if (!/^\d+$/.test(phone)) {
+        if (!/^\d+$/.test(phone))  {
             document.getElementById('phone-error').textContent = 'Phone must be numeric';
             return;
         }
 
-        if (!/^\d+$/.test(pin)) {
-            document.getElementById('pin-error').textContent = 'PIN must be numeric';
+        if (!/^\d+$/.test(pin1)|| !/^\d+$/.test(pin2)) {
+            pinError.textContent = 'PIN must be numeric';
             return;
+        }
+
+        // Check if pin1 and pin2 values match
+        if (pin1 !== pin2) {
+            // Show error message
+            pinError.textContent = 'PINs do not match';
+            return;
+        } else {
+            // Clear error message if values match
+            pinError.textContent = '';
         }
 
         // Check if any field is empty
