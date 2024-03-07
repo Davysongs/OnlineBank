@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Check if any field is empty
-        if (firstName === '' || lastName === '' || email === '' || phone === '' || address === '' || city === '' || country === '' || postcode === '' || state === '' || pin === '') {
+        if (firstName === '' || lastName === '' || email === '' || phone === '' || address === '' || city === '' || country === '' || postcode === '' || state === '' || pin1 === '' || pin2 === '') {
             document.getElementById('form-error').textContent = 'Please fill in all fields';
             return;
         }
