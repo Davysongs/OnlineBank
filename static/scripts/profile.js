@@ -1,27 +1,6 @@
-const imageUpload = document.getElementById('image-upload');
-const imagePreview = document.getElementById('image-preview');
-imagePreview.innerHTML = `<img id="default-image" src="{% static 'img/profile.gif' %}" alt="Default Image" width="500px" height"500px">`
-const defaultImage = document.getElementById('upload-container');
-defaultImage.addEventListener('click', function() {
-    imageUpload.click();
-});
 
-imageUpload.addEventListener('change', function() {
-    const file = this.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const img = document.createElement('img');
-            img.src = event.target.result;
-            imagePreview.innerHTML = '';
-            imagePreview.appendChild(img);
-        }
-        reader.readAsDataURL(file);
-    }
-});
-
+const form = document.getElementById('form')
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('registration-form');
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -31,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
         errorMessages.forEach(msg => msg.textContent = '');
 
         // Fetch form input values
-        const firstName = document.getElementById('first-name').value.trim();
-        const lastName = document.getElementById('last-name').value.trim();
+        const firstName = document.getElementById('first_name').value.trim();
+        const lastName = document.getElementById('last_name').value.trim();
         const email = document.getElementById('email').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const address = document.getElementById('address').value.trim();
@@ -57,6 +36,35 @@ document.addEventListener('DOMContentLoaded', function() {
         if (firstName === '' || lastName === '' || email === '' || phone === '' || address === '' || city === '' || country === '' || postcode === '' || state === '' || pin === '') {
             document.getElementById('form-error').textContent = 'Please fill in all fields';
             return;
+        }
+        const imageUpload = document.getElementById('image-upload');
+        const imagePreview = document.getElementById('image-preview');
+        const errorMessage = document.getElementById('upload-error');
+
+        // Reset previous error messages
+        errorMessage.textContent = '';
+
+        // Check if a file has been selected
+        if (!imageUpload.files || !imageUpload.files[0]) {
+            errorMessage.textContent = 'Please select an image';
+            event.preventDefault(); // Prevent form submission
+        } else {
+            // Check if the file type is valid
+            const fileType = imageUpload.files[0].type;
+            if (!fileType.startsWith('image/')) {
+                errorMessage.textContent = 'Please select a valid image file';
+                event.preventDefault(); // Prevent form submission
+            } else {
+                // Optionally, you can display a preview of the selected image
+                const file = imageUpload.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imagePreview.innerHTML = `<img src="${e.target.result}" alt="Image Preview">`;
+                };
+
+                reader.readAsDataURL(file);
+            }
         }
 
         // Submit the form if all validations pass
