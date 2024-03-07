@@ -6,8 +6,6 @@ class Account(models.Model):
     balance = models.DecimalField(max_digits=8, decimal_places=2)
     regtime = models.DateTimeField(auto_now_add = True, help_text = "time of registeration")
     image = models.ImageField(upload_to = 'Profile Pictures')
-    first_name = models.CharField(max_length = 100, blank = False)
-    last_name = models.CharField(max_length = 100, blank = False)
     phone = models.CharField(blank = False, max_length = 15)
     address = models.CharField(blank = False, max_length = 200)
     city = models.CharField(blank = False, max_length = 200)
@@ -16,4 +14,4 @@ class Account(models.Model):
     state = models.CharField(blank = False, max_length=200)
     pin = models.CharField(max_length=128,help_text="4 digit PIN for transaction verification.")        
     def __str__(self):
-        return self.email
+        return self.account_no

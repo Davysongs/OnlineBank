@@ -50,7 +50,6 @@ def profile(request):
         postcode = request.POST.get('postcode')
         state = request.POST.get('state')
         pin = request.POST.get('pin1')
-        print(pin, type(pin))
         number =  generate_account_number() 
         user = request.user
             # If the user doesn't have an account, create a new one
@@ -60,7 +59,6 @@ def profile(request):
             account_no = number,
             first_name=first_name,
             last_name=last_name,
-            email=email,
             phone=phone,
             address=address,
             city=city,
