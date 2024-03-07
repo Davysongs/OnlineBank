@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from accounts.models import Account
 from transactions.models import Trans
 from login_required import login_not_required
-from custom_user.models import User
+
 
 # Create your views here.
 @login_not_required
@@ -24,5 +24,32 @@ def dashboard(request):
 def profile(request):
     if request.method == "GET":
         return render(request, "profile.html")
+    if request.method == 'POST':
+        # Retrieve form data
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        country = request.POST.get('country')
+        postcode = request.POST.get('postcode')
+        state = request.POST.get('state')
+        pin = request.POST.get('pin')
+
+        # Create and save UserProfile instance
+        user_profile = Account(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            phone=phone,
+            address=address,
+            city=city,
+            country=country,
+            postcode=postcode,
+            state=state,
+            pin=pin
+        )
+        user_profile.save()
 
 

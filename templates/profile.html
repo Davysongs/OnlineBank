@@ -2,19 +2,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="{% static 'css/profile.css' %}">
-<title>{{ context.username }} | Profile</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #upload-container {
+            text-align: center;
+        }
+
+        #image-preview {
+            display: block;
+            width: 200px; /* Adjust as needed */
+            height: auto;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #image-preview img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #image-upload {
+            display: none;
+        }
+
+        #upload-label {
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Profile update page  {{ context.username }} </h1>
-    <a href="{% url 'logout' %}">LOGOUT</a>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div class="container">
+    <h2>User Information Form</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div id="upload-container">
+            <input type="file" name="image" id="image-upload" accept="image/*" required>
+            <div id="image-preview">
+                <!-- Image preview will be displayed here -->
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="first_name">First Name</label><br>
+            <input type="text" name="first_name" id="first_name" required>
+        </div>
+        <div class="input-group">
+            <label for="last_name">Last Name</label><br>
+            <input type="text" name="last_name" id="last_name" required>
+        </div>
+        <div class="input-group">
+            <label for="email">Email</label><br>
+            <input type="email" name="email" id="email" required>
+        </div>
+        <div class="input-group">
+            <label for="phone">Phone</label><br>
+            <input type="tel" name="phone" id="phone" maxlength="13" required >
+        </div>
+        <div class="input-group">
+            <label for="address">Address</label><br>
+            <input type="text" name="address" id="address" required>
+        </div>
+        <div class="input-group">
+            <label for="city">City</label><br>
+            <input type="text" name="city" id="city" required>
+        </div>
+        <div class="input-group">
+            <label for="country">Country</label><br>
+            <input type="text" name="country" id="country" required>
+        </div>
+        <div class="input-group">
+            <label for="postcode">Postcode</label><br>
+            <input type="text" name="postcode" id="postcode" required>
+        </div>
+        <div class="input-group">
+            <label for="state">State</label><br>
+            <input type="text" name="state" id="state" required>
+        </div>
+        <div class="input-group">
+            <label for="pin">PIN</label><br>
+            <input type="password" name="pin" id="pin" maxlength="4" required>
+            <small>4-digit PIN for transaction verification.</small>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
 </body>
+<script>
+    const imageUpload = document.getElementById('image-upload');
+    const imagePreview = document.getElementById('image-preview');
+    imagePreview.innerHTML = `<img id="default-image" src="{% static 'img/profile.gif' %}" alt="Default Image" width="500px" height"500px">`
+    const defaultImage = document.getElementById('upload-container');
+    defaultImage.addEventListener('click', function() {
+        imageUpload.click();
+    });
+
+    imageUpload.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = document.createElement('img');
+                img.src = event.target.result;
+                imagePreview.innerHTML = '';
+                imagePreview.appendChild(img);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 </html>
