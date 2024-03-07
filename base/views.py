@@ -25,6 +25,8 @@ def profile(request):
     if request.method == "GET":
         return render(request, "profile.html")
     if request.method == 'POST':
+        uid = request.user.email
+        print(uid)
         # Retrieve form data
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -37,19 +39,20 @@ def profile(request):
         state = request.POST.get('state')
         pin = request.POST.get('pin')
 
-        # Create and save UserProfile instance
-        user_profile = Account(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            phone=phone,
-            address=address,
-            city=city,
-            country=country,
-            postcode=postcode,
-            state=state,
-            pin=pin
-        )
+        # Retrieve existing user profile instance
+        user_profile = Account.objects.get(email=uid)
+
+        # Update fields with new data
+        user_profile.first_name = first_name
+        user_profile.last_name = last_name
+        user_profile.email = email
+        user_profile.phone = phone
+        user_profile.address = address
+        user_profile.city = city
+        user_profile.country = country
+        user_profile.postcode = postcode
+        user_profile.state = state
+        user_profile.pin = pin
+
+        # Save the updated user profile instance
         user_profile.save()
-
-
