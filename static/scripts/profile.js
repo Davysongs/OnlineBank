@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Fetch form input values
         const firstName = document.getElementById('first_name').value.trim();
         const lastName = document.getElementById('last_name').value.trim();
-        const email = document.getElementById('email').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const address = document.getElementById('address').value.trim();
         const city = document.getElementById('city').value.trim();
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Check if any field is empty
-        if (firstName === '' || lastName === '' || email === '' || phone === '' || address === '' || city === '' || country === '' || postcode === '' || state === '' || pin1 === '' || pin2 === '') {
+        if (firstName === '' || lastName === '' || phone === '' || address === '' || city === '' || country === '' || postcode === '' || state === '' || pin1 === '' || pin2 === '') {
             document.getElementById('form-error').textContent = 'Please fill in all fields';
             return;
         }

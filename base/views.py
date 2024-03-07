@@ -26,9 +26,7 @@ def dashboard(request):
 
 def generate_account_number():
     while True:
-        # Generate a random string of numbers
         account_no = ''.join(random.choices(string.digits, k=10))
-
         # Check if the generated number already exists in the Account model
         if not Account.objects.filter(account_no=account_no).exists():
             # If the number doesn't exist, return it
@@ -41,6 +39,7 @@ def profile(request):
         uid=request.user.email
         print(uid)
         # Retrieve form data
+        picture = request.POST.get('image')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
@@ -69,6 +68,7 @@ def profile(request):
             postcode=postcode,
             state=state,
             balance=0,
+            image= picture
             )
         return redirect('dashboard')
 
