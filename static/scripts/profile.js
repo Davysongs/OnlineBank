@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         errorMessages.forEach(msg => msg.textContent = '');
 
         // Fetch form input values
-        const firstName = document.getElementById('first_name').value.trim();
-        const lastName = document.getElementById('last_name').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const address = document.getElementById('address').value.trim();
         const city = document.getElementById('city').value.trim();
@@ -21,10 +19,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const pin1 = document.getElementById('pin1').value.trim();
         const pin2 = document.getElementById('pin2').value.trim();
         var pinError = document.getElementById('pin-error')
+        var phoneError = document.getElementById('phone-error')
 
         // Validate numeric inputs
         if (!/^\d+$/.test(phone))  {
-            document.getElementById('phone-error').textContent = 'Phone must be numeric';
+            phoneError.textContent = 'Phone number must be numeric';
+            return;
+        }
+        if (phone.length<=6){
+            phoneError.textContent = 'Phone number is too short';
             return;
         }
 
@@ -44,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Check if any field is empty
-        if (firstName === '' || lastName === '' || phone === '' || address === '' || city === '' || country === '' || postcode === '' || state === '' || pin1 === '' || pin2 === '') {
+        if ( phone === '' || address === '' || city === '' || country === '' || postcode === '' || state === '' || pin1 === '' || pin2 === '') {
             document.getElementById('form-error').textContent = 'Please fill in all fields';
             return;
         }

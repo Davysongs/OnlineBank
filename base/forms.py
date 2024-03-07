@@ -8,7 +8,7 @@ class SignUpForm(UserCreationForm):
         model = User
         fields =["email","password1", "password2", "first_name", "last_name"]
 
-class MyModelForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['image','pin','phone','state','postcode','country', 'address','city']

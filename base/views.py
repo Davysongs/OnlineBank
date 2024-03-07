@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from accounts.models import Account
 from login_required import login_not_required
 from django.contrib.auth.hashers import make_password
+from .forms import UserForm
+from django.shortcuts import get_object_or_404
 import random
 import string
 
@@ -33,40 +35,39 @@ def generate_account_number():
             return account_no
     
 def profile(request):
+    form = UserForm()
     if request.method == "GET":
-        return render(request, "profile.html")
+        context = {"form" : form}
+        return render(request, "profile.html",context )
     if request.method == 'POST':
-        uid=request.user.email
-        print(uid)
-        # Retrieve form data
-        picture = request.POST.get('image')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        address = request.POST.get('address')
-        city = request.POST.get('city')
-        country = request.POST.get('country')
-        postcode = request.POST.get('postcode')
-        state = request.POST.get('state')
-        pin = request.POST.get('pin1')
-        number =  generate_account_number() 
         user = request.user
-            # If the user doesn't have an account, create a new one
-        account = Account.objects.create(
-            user=user,
-            pin=make_password(pin),    
-            account_no = number,
-            first_name=first_name,
-            last_name=last_name,
-            phone=phone,
-            address=address,
-            city=city,
-            country=country,
-            postcode=postcode,
-            state=state,
-            balance=0,
-            image= picture
-            )
-        return redirect('dashboard')
+        instance = get_object_or_404(Account, user= user)
+        form =  UserForm(request.POST, request.FILES, instance = instance)
+        if form.is_valid():
+            picture = form.cleaned_data('image')
+            phone = form.cleaned_data('phone')
+            address = form.cleaned_data('address')
+            city = form.cleaned_data('city')
+            country = form.cleaned_data('country')
+            postcode = form.cleaned_data('postcode')
+            state = form.cleaned_data('state')
+            pin = form.cleaned_data('pin1')
+            number =  generate_account_number() 
+            
+        
+            Account.objects.create(
+                user=user,
+                pin=make_password(pin),    
+                account_no = number,
+                phone=phone,
+                address=address,
+                city=city,
+                country=country,
+                postcode=postcode,
+                state=state,
+                balance=0,
+                image= picture
+                )
+            return redirect('dashboard')
+    return redirect('dashboard')
 
