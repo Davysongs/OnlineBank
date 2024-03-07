@@ -112,6 +112,7 @@
             <label for="phone">Phone</label><br>
             <input type="tel" name="phone" id="phone" maxlength="13" required >
         </div>
+        <span id="phone-error" class="error-message"></span>
         <div class="input-group">
             <label for="address">Address</label><br>
             <input type="text" name="address" id="address" required>
@@ -142,27 +143,5 @@
 </div>
 
 </body>
-<script>
-    const imageUpload = document.getElementById('image-upload');
-    const imagePreview = document.getElementById('image-preview');
-    imagePreview.innerHTML = `<img id="default-image" src="{% static 'img/profile.gif' %}" alt="Default Image" width="500px" height"500px">`
-    const defaultImage = document.getElementById('upload-container');
-    defaultImage.addEventListener('click', function() {
-        imageUpload.click();
-    });
-
-    imageUpload.addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = document.createElement('img');
-                img.src = event.target.result;
-                imagePreview.innerHTML = '';
-                imagePreview.appendChild(img);
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
+<script src="{% static 'profile.js' %}"></script>
 </html>
