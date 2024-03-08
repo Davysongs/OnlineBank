@@ -32,8 +32,6 @@ def profile(request):
         user = request.user
         try:
             account = Account.objects.get(user=user)
-            raise CustomException("You already have an account")
-        except Account.DoesNotExist:
             form = UserForm(request.POST, request.FILES)
             if form.is_valid():
                 cleaned_data = form.cleaned_data
@@ -41,4 +39,6 @@ def profile(request):
                     new_account = form.save(commit=False)
                     new_account.save(force_insert=True)
                 return redirect('dashboard')
+        except Account.DoesNotExist:
+            raise CustomException("You already have an account")
 
