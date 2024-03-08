@@ -43,6 +43,13 @@
                 <p>We are happy to have you back at <br> Top-Choice Bank.</p>
             </div>
             <h2 class="login-error"></h2>
+            {% if messages %}
+            <div id="error-message" class="text-danger">
+                {% for message in messages %}
+                    <b class="login-error">{{ message }}</b>
+                {% endfor %}
+            </div>
+            {% endif %}
             <h2 class="login">LOGIN</h2>
 
             <div class="input-email">

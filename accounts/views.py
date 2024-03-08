@@ -25,28 +25,22 @@ def login_view(request):
 #sign up view
 @login_not_required
 def register_view(request):
-    #show link has been sent to your email
-    #execute email verifivation 
-    #take the user to the login view after email verification is complete
-    form = SignUpForm()
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         context = {"form" : form}
         if form.is_valid():
             form.save()
-            # Set a flag to indicate successful registration
             condition = True
             return render(request, "register.html", {'condition': condition})
-        return render(request, "register.html", context)
-    elif request.method == "GET":
-        context = {"form" : form}
-        return render(request, "register.html", context)
+
     
+    if request.method == "GET":
+        form = SignUpForm()
+        return render(request, "register.html", {"form" : form})
 
-
-    return render(request, "register.html")
 
 #Logout
 def logout_user(request):
     logout(request)
     return redirect('home')
+
