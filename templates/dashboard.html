@@ -54,7 +54,7 @@
         <section class="main">
             <div class="main-top">
                 <h2>Hey, <span id="name">{{ context.nickname }}</span></h2>
-                <i class="fas fa-user-cog"></i>
+                <a href="{% url 'profile' %}"><i class="fas fa-user-cog"></i></a>
                 <h3>Balance: {{ context.balance }} <span id="acc-no"></span></h3>
             </div>
             
