@@ -5,40 +5,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top-Choice Bank || Dash Board</title>
+    <title>Top-Choice Bank || Dashboard</title>
     
     <link rel="stylesheet" href="{% static 'CSS/dashboard.css' %}">
     <link rel="stylesheet" href="{% static 'CSS/all.min.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-    <link rel="icon" href="">
+    <link rel="icon" href="{% static 'Img/t.svg' %}">
 </head>
 <body>
     <div class="container" id="top">
         <nav class="dash-nav">
             <ul>
-                <li><a href="./index.html" class="dash-logo">
+                <li><a href="{% url 'home' %}" class="dash-logo">
                     <img src="{% static 'Img/logo.png' %}" alt="myLogo">
                     <span class="nav-item">TOP-CHOICE BANK</span>
                 </a></li>
                 
-                <li><a href="dashboard.html#" id="side-button-1">
-                    <i class="fas fa-wallet"></i>
-                    <span class="nav-item">Balance</span>
-                </a></li>
-                
-                <li><a href="dashboard.html#" id="side-button-2">
+                <li><a href="{% url 'dashboard' %}#" id="side-button-2">
                     <i class="fas fa-exchange"></i>
                     <span class="nav-item">Transfer</span>
                 </a></li>
                 
-                <li><a href="dashboard.html#" id="side-button-3">
+                <li><a href="{% url 'dashboard' %}#" id="side-button-3">
                     <i class="fas fa-money-check-alt"></i>
                     <span class="nav-item">Deposit</span>
                 </a></li>
 
-                <li><a href="dashboard.html#" id="side-button-4">
+                <li><a href="{% url 'dashboard' %}#" id="side-button-4">
                     <i class="fas fa-random"></i>
                     <span class="nav-item">Withdraw</span>
+                </a></li>
+
+                <li><a href="{% url 'dashboard' %}#" id="side-button-1">
+                    <i class="fas fa-wallet"></i>
+                    <span class="nav-item">Balance</span>
                 </a></li>
 
                 <li><a href="{% url 'logout' %}" class="logout" id="logout">
@@ -54,9 +54,9 @@
 
         <section class="main">
             <div class="main-top">
-                <h2>Welcome to your Dashboard, <span id="name">{{ context.user }}</span></h2>
-                <!-- <i class="fas fa-user-cog"></i> -->
-                <h3>Acc no: <span id="acc-no"></span></h3>
+                <h2>Hey, <span id="name">{{ context.nickname }}</span></h2>
+                <i class="fas fa-user-cog"></i>
+                <h3>Balance: {{ context.balance }} <span id="acc-no"></span></h3>
             </div>
             
 
@@ -69,7 +69,7 @@
 
                     <div class="popup" id="popup-balance">
                         <i class="fas fa-times cancel-pop1"></i>
-                        <p class="amount">Your Balance is: {{ context.balance }}</p>
+                        <p class="amount">Your Balance is: </p>
                         <button type="button" id="close-popup">OK</button>
                     </div>
                 </div>
@@ -119,13 +119,10 @@
                 
             </div>
             <section class="bottom-card">
-                <h1>TOP-CHOICE BANK INFO</h1>
+                <h1>TOP-CHOICE PAY</h1>
                 <div class="bottom-card-box">
                     <ul>
                         <li class="integrity-acc active">TOP-CHOICE ACCOUNTS</li>
-                        <li class="transact">TRANSACTION HISTORY</li>
-                        <!-- <li></li>
-                        <li></li> -->
                     </ul>
                     <div class="bottom-card-details">
                         <div class="bottom-box-details box1">

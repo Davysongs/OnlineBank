@@ -17,8 +17,8 @@ def homepage(request):
 def dashboard(request):
     if request.method == "GET":
         try:
-            user_no = request.user.account_no
-            details = Account.objects.get(account_no = user_no)
+            user = request.user
+            details = Account.objects.get(user = user)
             return render(request, "dashboard.html", {'context':details})
         except:
             #User have not finished account creation then redirect to account registration
@@ -52,10 +52,12 @@ def profile(request):
             postcode = form.cleaned_data('postcode')
             state = form.cleaned_data('state')
             pin = form.cleaned_data('pin1')
+            nickname = form.cleaned_data('nickname')
             number =  generate_account_number() 
             
         
             Account.objects.create(
+                nickname = nickname,
                 user=user,
                 pin=make_password(pin),    
                 account_no = number,
