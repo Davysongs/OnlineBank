@@ -2,7 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from login_required import login_not_required
-from base.forms import SignUpForm
+from accounts.forms import SignUpForm
+from .forms import UserForm
+from django.db import transaction
+from base.middlewares import CustomException
+from accounts.models import Account
 
 
 # Create your views here.
@@ -43,4 +47,26 @@ def register_view(request):
 def logout_user(request):
     logout(request)
     return redirect('home')
+
+
+def profile(request):
+    user = request.user
+
+    if request.method == "GET":
+        try:
+            account_details = Account.objects.get(user=user)
+            form = UserForm(instance=account_details)  # Populate the form with existing data
+        except Account.DoesNotExist:
+            form = UserForm()
+        return render(request, "profile.html", {"form": form})
+
+    if request.method == 'POST':
+        try:
+            account_details = Account.objects.get(user=user)
+            form = UserForm(request.POST, request.FILES, instance=account_details)
+            if form.is_valid():
+                form.save()
+                return redirect('dashboard')
+        except Account.DoesNotExist:
+            raise CustomException("You already have an account")
 
