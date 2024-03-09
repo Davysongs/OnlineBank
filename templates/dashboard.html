@@ -61,7 +61,9 @@
                 </div>
                 <h2>Hey, <span id="name">{{ context.nickname }}</span></h2>
                 <a href="{% url 'profile' %}"><i class="fas fa-user-cog"></i></a>
-                <h3 id="balance-display">Balance: <span id="balance-value">{{ context.balance }}</span>
+                <h3 id="balance-display">Balance: 
+                    <span id="balance-value">&#x20A6;100,000</span>
+                    <span id="hidden"> **** </span>
                     <i id="show-balance" class="fas fa-eye open-eye"></i>
                     <i id="hide-balance" class="fas fa-eye-slash close-eye" style="display: none;"></i>
                 </h3>

@@ -27,24 +27,29 @@ const amount = document.querySelector('.amount');
 const overlay = document.querySelector(".overlay");
 
 //balance visibillity
- // Get the eye icons and balance value elements
- const showIcon = document.getElementById('show-balance');
- const hideIcon = document.getElementById('hide-balance');
- const balanceValue = document.getElementById('balance-value');
+// Get elements by their IDs
+const showIcon = document.getElementById('show-balance');
+const hideIcon = document.getElementById('hide-balance');
+const balanceValue = document.getElementById('balance-value');
+const star = document.getElementById('hidden');
 
- // Add click event listeners to toggle visibility
- showIcon.addEventListener('click', function() {
-     showIcon.style.display = 'none';
-     hideIcon.style.display = 'inline-block';
-     balanceValue.textContent = '***';
- });
+// Hide the balance value initially
+balanceValue.style.display = 'none';
 
- hideIcon.addEventListener('click', function() {
-     showIcon.style.display = 'inline-block';
-     hideIcon.style.display = 'none';
-     balanceValue.textContent = '{{ context.balance }}';
- });
+// Add click event listeners to toggle visibility
+showIcon.addEventListener('click', function() {
+    showIcon.style.display = 'none';
+    hideIcon.style.display = 'inline-block';
+    balanceValue.style.display = 'inline'; // Show the balance value
+    star.style.display = 'none'; // Hide the hidden placeholder
+});
 
+hideIcon.addEventListener('click', function() {
+    showIcon.style.display = 'inline-block';
+    hideIcon.style.display = 'none';
+    balanceValue.style.display = 'none';
+    star.style.display = 'inline'; // Show the hidden placeholder
+});
 // WORKING OPERATION
 
 
