@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const country = document.getElementById('country').value.trim();
         const postcode = document.getElementById('postcode').value.trim();
         const state = document.getElementById('state').value.trim();
-        const pin1 = document.getElementById('pin1').value.trim();
+        const pin1 = document.getElementById('pin').value.trim();
         const pin2 = document.getElementById('pin2').value.trim();
         var pinError = document.getElementById('pin-error')
         var phoneError = document.getElementById('phone-error')

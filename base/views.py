@@ -33,7 +33,7 @@ def profile(request):
             form = UserForm(instance=account_details)  # Populate the form with existing data
         except Account.DoesNotExist:
             form = UserForm()
-        return render(request, "test.html", {"form": form})
+        return render(request, "profile.html", {"form": form})
 
     if request.method == 'POST':
         try:
