@@ -31,7 +31,6 @@ def login_view(request):
 def register_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-        context = {"form" : form}
         if form.is_valid():
             form.save()
             condition = True
@@ -51,23 +50,26 @@ def logout_user(request):
 
 def profile(request):
     user = request.user
-    details = Account.objects.get(user=user)
-    if request.method == "GET":
-        try:
-            form = UserForm(instance=details)  # Populate the form with existing data
-            if  details.pin != "":
-                return render(request,'profile.html', {'form' : form})
-        except Account.DoesNotExist:
-            raise CustomException("Your account is not configured properly")
+    try:
+        details = Account.objects.get(user=user)
+    except Account.DoesNotExist:
+        raise CustomException("Your account is not configured properly")
 
-    if request.method == 'POST':
-        try:
-            details = Account.objects.get(user=user)
-            form = UserForm(request.POST, request.FILES, instance=details)
-            if form.is_valid():
-                print("check")
-                form.save()
+    if request.method == "GET":
+        form = UserForm()  # Create a form instance
+        if details.pin:  # Check if the user has a PIN
+            return render(request, 'profile.html', {'details': details, 'form': form})
+        else:
+            return render(request, 'update.html', {'form': form})
+
+    elif request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=details)  # Populate form with existing data
+        if form.is_valid():
+            form.save()  # Save the form data
             return redirect('dashboard')
-        except Account.DoesNotExist:
-            raise CustomException("You already have an account")
+        else:
+            # Form is not valid, handle the error scenario here
+            # You might want to render the profile page again with the form and error messages
+            # For example
+            return render(request, 'update.html', {'details': details, 'form': form})
 

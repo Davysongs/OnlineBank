@@ -2,93 +2,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Information Form</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="User Profile content page"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="">
+<title></title>
 </head>
 <body>
-
-<div class="container">
-    <h2>User Information Form</h2>
-    <form method="POST" enctype="multipart/form-data" id="form">
-        {% csrf_token %}
-        <span id="form-error" class="error-message"></span>
-        <div id="upload-container">
-            <input type="file" name="image" id="image-upload" accept="image/*,.jpg,.png,.svg" >
-            <div id="image-preview">
-                <!-- Image preview will be displayed here -->
-            </div>
-            <span id="upload-error" class="error-message"></span>
-        </div>
-        <div class="input-group">
-            <label for="address">Nickname</label><br>
-            <input type="text" name="Nickname" id="Nickname" placeholder="Enter within 30 characters" required>
-        </div>
-        <div class="input-group">
-            <label for="phone">Phone</label><br>
-            <input type="text" pattern="{0-9}{10}" name="phone" id="phone" maxlength="13" placeholder= "ex: 070123456789" required >
-            <span id="phone-error" class="error-message"></span>
-        </div>
-        <div class="input-group">
-            <label for="address">Address</label><br>
-            <input type="text" name="address" placeholder="Residental address" id="address" required>
-        </div>
-        <div class="input-group">
-            <label for="country">Country</label><br>
-            <input type="text" name="country" placeholder="Nationality" id="country" required>
-        </div>
-        <div class="input-group">
-            <label for="state">State</label><br>
-            <input type="text" name="state" placeholder="State of residence" id="state" required>
-        </div>
-        <div class="input-group">
-            <label for="city">City</label><br>
-            <input type="text" name="city" placeholder="City of residence" id="city" required>
-        </div>
-        <div class="input-group">
-            <label for="postcode">Postcode</label><br>
-            <input type="text" name="postcode" autocomplete="off" id="postcode" required>
-        </div>
-        <div class="input-group">
-            <label for="pin1">PIN</label><small> 4-digit PIN for transaction verification.</small><br>
-            <span id="pin-error" class="error-message"></span><br>
-            <input type="password" name="pin" id="pin" maxlength="4" autocomplete="off" required>
-        </div>
-        <div class="input-group">
-            <label for="pin2">Confirm PIN</label><br>
-            <input type="password" name="pin2" id="pin2" maxlength="4" autocomplete="off" required>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
-</div>
-
+    <h1>{{ details.nickname }} profile page</h1>
+    <h2>{{form.nickname}}</h2>
+  
+    {% if details.image %}
+    <img src="{{ details.image.url }}" alt="Profile" width="40px" height="40px"/>
+    {% else %}
+    <img src="{% static 'img/icon.jpg' %}" alt="image"/>
+    {% endif %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 </body>
-<script>
-    const imageUpload = document.getElementById('image-upload');
-    const imagePreview = document.getElementById('image-preview');
-
-    imagePreview.innerHTML = `<img id="default-image" src="{% static 'img/profile.gif' %}" alt="Default Image" width="500px" height"500px">`
-    const defaultImage = document.getElementById('upload-container');
-    defaultImage.addEventListener('click', function() {
-        imageUpload.click();
-    });
-
-    imageUpload.addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = document.createElement('img');
-                img.src = event.target.result;
-                imagePreview.innerHTML = '';
-                imagePreview.appendChild(img);
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
-<script src="{% static 'scripts/profile.js' %}"></script>
 </html>

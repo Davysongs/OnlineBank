@@ -53,17 +53,20 @@ button[type="submit"] {
 
 #image-preview {
     display: block;
-    width: 200px; /* Adjust as needed */
-    height: auto;
     margin: 0 auto;
     border: 1px solid #ccc;
-    border-radius: 5px;
     overflow: hidden;
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border-radius: 50%; /* Creates a circular shape */
+    overflow: hidden; /* Ensures content doesn't overflow the circular container */
+    border: 2px solid #ccc; /* Optional: Add border */
 }
 
 #image-preview img {
-    max-width: 100%;
     height: auto;
+    width: 100%; /* Ensures the image fills the container */
+    display: block; /* Prevents extra space at the bottom */
 }
 
 #image-upload {

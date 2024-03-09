@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const postcode = document.getElementById('postcode').value.trim();
         const state = document.getElementById('state').value.trim();
         const pin1 = document.getElementById('pin').value.trim();
-        const pin2 = document.getElementById('pin2').value.trim();
+        // const pin2 = document.getElementById('pin2').value.trim();
         var pinError = document.getElementById('pin-error')
         var phoneError = document.getElementById('phone-error')
 
@@ -31,32 +31,33 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        if (!/^\d+$/.test(pin1)|| !/^\d+$/.test(pin2)) {
-            pinError.textContent = 'PIN must be numeric';
-            return;
-        }
+        // if (!/^\d+$/.test(pin1)|| !/^\d+$/.test(pin2)) {
+        //     pinError.textContent = 'PIN must be numeric';
+        //     return;
+        // }
         //check the length of both pins
         if (pin1.length < 4) {
             pinError.textContent = 'PIN 1 is too short';
             return;
         }
         
-        if (pin2.length < 4) {
-            pinError.textContent = 'PIN 2 is too short';
-            return;
-        }
+        // if (pin2.length < 4) {
+        //     pinError.textContent = 'PIN 2 is too short';
+        //     return;
+        // }
         
         // Check if pin1 and pin2 values match
-        if (pin1 !== pin2) {
-            pinError.textContent = 'PINs do not match';
-            return;
-        } else {
+        // if (pin1 !== pin2) {
+        //     pinError.textContent = 'PINs do not match';
+        //     return;
+        //}
+        else {
             // Clear error message if values match
             pinError.textContent = '';
         }
 
         // Check if any field is empty
-        if ( phone === '' || address === '' || city === '' || country === '' || postcode === '' || state === '' || pin1 === '' || pin2 === '') {
+        if ( phone === '' || address === '' || city === '' || country === '' || postcode === '' || state === '' || pin1 === '' ) {
             document.getElementById('form-error').textContent = 'Please fill in all fields';
             return;
         }
