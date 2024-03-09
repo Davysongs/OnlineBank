@@ -4,7 +4,7 @@ from django.contrib import messages
 from login_required import login_not_required
 from accounts.forms import SignUpForm
 from .forms import UserForm
-from django.db import transaction
+from django.http import HttpResponseRedirect
 from base.middlewares import CustomException
 from accounts.models import Account
 
@@ -51,22 +51,23 @@ def logout_user(request):
 
 def profile(request):
     user = request.user
-
+    details = Account.objects.get(user=user)
     if request.method == "GET":
         try:
-            account_details = Account.objects.get(user=user)
-            form = UserForm(instance=account_details)  # Populate the form with existing data
+            form = UserForm(instance=details)  # Populate the form with existing data
+            if  details.pin != "":
+                return render(request,'profile.html', {'form' : form})
         except Account.DoesNotExist:
-            form = UserForm()
-        return render(request, "profile.html", {"form": form})
+            raise CustomException("Your account is not configured properly")
 
     if request.method == 'POST':
         try:
-            account_details = Account.objects.get(user=user)
-            form = UserForm(request.POST, request.FILES, instance=account_details)
+            details = Account.objects.get(user=user)
+            form = UserForm(request.POST, request.FILES, instance=details)
             if form.is_valid():
+                print("check")
                 form.save()
-                return redirect('dashboard')
+            return redirect('dashboard')
         except Account.DoesNotExist:
             raise CustomException("You already have an account")
 

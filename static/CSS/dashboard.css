@@ -76,6 +76,10 @@ nav .fas{
     background: var(--dash-color);
 }
 
+.eyes{
+    font-size: .8em; 
+}
+
 .logout{
     margin-top: 160px;
 }

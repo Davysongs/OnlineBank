@@ -35,10 +35,19 @@ document.addEventListener('DOMContentLoaded', function() {
             pinError.textContent = 'PIN must be numeric';
             return;
         }
-
+        //check the length of both pins
+        if (pin1.length < 4) {
+            pinError.textContent = 'PIN 1 is too short';
+            return;
+        }
+        
+        if (pin2.length < 4) {
+            pinError.textContent = 'PIN 2 is too short';
+            return;
+        }
+        
         // Check if pin1 and pin2 values match
         if (pin1 !== pin2) {
-            // Show error message
             pinError.textContent = 'PINs do not match';
             return;
         } else {
