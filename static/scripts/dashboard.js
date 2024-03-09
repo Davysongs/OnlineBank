@@ -23,10 +23,27 @@ const cancelPop4 = document.querySelector('.cancel-pop4');
 
 const accName = document.querySelector('#name');
 const amount = document.querySelector('.amount');
-const accNo = document.querySelector('#acc-no');
 
 const overlay = document.querySelector(".overlay");
 
+//balance visibillity
+ // Get the eye icons and balance value elements
+ const showIcon = document.getElementById('show-balance');
+ const hideIcon = document.getElementById('hide-balance');
+ const balanceValue = document.getElementById('balance-value');
+
+ // Add click event listeners to toggle visibility
+ showIcon.addEventListener('click', function() {
+     showIcon.style.display = 'none';
+     hideIcon.style.display = 'inline-block';
+     balanceValue.textContent = '***';
+ });
+
+ hideIcon.addEventListener('click', function() {
+     showIcon.style.display = 'inline-block';
+     hideIcon.style.display = 'none';
+     balanceValue.textContent = '{{ context.balance }}';
+ });
 
 // WORKING OPERATION
 

@@ -23,22 +23,26 @@ def dashboard(request):
     elif request.method=="POST":
         pass
     
+
 def profile(request):
+    user = request.user
+
     if request.method == "GET":
-        form = UserForm()
+        try:
+            account_details = Account.objects.get(user=user)
+            form = UserForm(instance=account_details)  # Populate the form with existing data
+        except Account.DoesNotExist:
+            form = UserForm()
         return render(request, "test.html", {"form": form})
 
     if request.method == 'POST':
-        user = request.user
         try:
-            account = Account.objects.get(user=user)
-            form = UserForm(request.POST, request.FILES)
+            account_details = Account.objects.get(user=user)
+            form = UserForm(request.POST, request.FILES, instance=account_details)
             if form.is_valid():
-                cleaned_data = form.cleaned_data
-                with transaction.atomic():
-                    new_account = form.save(commit=False)
-                    new_account.save(force_insert=True)
+                form.save()
                 return redirect('dashboard')
         except Account.DoesNotExist:
             raise CustomException("You already have an account")
+
 

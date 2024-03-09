@@ -92,6 +92,23 @@ nav .fas{
     /* position: fixed; */
     margin-bottom: 40px;
 }
+.circular-container {
+    width: 80px; /* Adjust as needed */
+    height: 80px; /* Adjust as needed */
+    border-radius: 50%; /* Creates a circular shape */
+    overflow: hidden; /* Ensures content doesn't overflow the circular container */
+    border: 2px solid #ccc; /* Optional: Add border */
+    position: fixed;
+    top: 20px; /* Adjust the distance from the top */
+    right: 20px; /* Adjust the distance from the right */
+    z-index: 999; /* Ensure it's on top of other elements */
+}
+
+.circular-container img {
+    width: 100%; /* Ensures the image fills the container */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Prevents extra space at the bottom */
+}
 
 .cards{
     width: 127%;

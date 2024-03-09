@@ -50,15 +50,19 @@
         <div class="overlay">
             
         </div>
-
         <section class="main">
             <div class="main-top">
+                <div class="circular-container">
+                    <img src="{{ context.image.url }}" alt="Profile image"/>
+                </div>
                 <h2>Hey, <span id="name">{{ context.nickname }}</span></h2>
                 <a href="{% url 'profile' %}"><i class="fas fa-user-cog"></i></a>
-                <h3>Balance: {{ context.balance }} <span id="acc-no"></span></h3>
+                <h3 id="balance-display">Balance: <span id="balance-value">{{ context.balance }}</span>
+                    <i id="show-balance" class="fas fa-eye open-eye"></i>
+                    <i id="hide-balance" class="fas fa-eye-slash close-eye" style="display: none;"></i>
+                </h3>
+                
             </div>
-
-            <div><img src="{{ context.image }}"></div>
         
             <div class="cards">
                 <div class="card-details">

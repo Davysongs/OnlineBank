@@ -6,7 +6,7 @@ import random
 import string
 
 class Account(models.Model):
-    user = models.ForeignKey(get_user_model(), null=False, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
     account_no = models.CharField(max_length=10, primary_key=True)
     balance = models.DecimalField(max_digits=8, decimal_places=2, default = 0)
     regtime = models.DateTimeField(auto_now_add=True, help_text="time of registration")
