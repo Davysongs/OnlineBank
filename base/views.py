@@ -16,6 +16,7 @@ def dashboard(request):
         pass
     
 
-
+#    return '{:,}'.format(number)
+#     return string.replace(',', '')
 
 

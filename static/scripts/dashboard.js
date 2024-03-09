@@ -33,6 +33,13 @@ const hideIcon = document.getElementById('hide-balance');
 const balanceValue = document.getElementById('balance-value');
 const star = document.getElementById('hidden');
 
+// Add comma  to the number every 3 digits
+function addCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+segment = addCommas(balanceValue.innerHTML);
+balanceValue.innerHTML = segment
+
 // Hide the balance value initially
 balanceValue.style.display = 'none';
 
@@ -186,14 +193,6 @@ const login_details = JSON.parse(localStorage.getItem('login_details'))
 const formData = JSON.parse(localStorage.getItem('user'))
 
 
-// Looping over the registration details in the localstorage and using them in the Dashboard
-for (i = 0; i < formData.length; i++){
-    if(login_details.email === formData[i].email){
-        accName.innerText = `${formData[i].fullName}`
-        accNo.innerText = `${formData[i].accNum}`
-        amount.innerText = `Your Balance is: $${formData[i].amount}`
-    }
-}
 
 // transaction history
 const transactions = document.querySelector('.text-area')
@@ -477,14 +476,5 @@ integrityAcc.addEventListener('click', function(){
     integrityAccDetails2.style.display = ''
     integrityAccDetails3.style.display = ''
     transactDetails.style.display = 'none'
-})
-
-transact.addEventListener('click', function(){
-    integrityAcc.classList.remove('active')
-    transact.classList.add('active')
-    integrityAccDetails1.style.display = 'none'
-    integrityAccDetails2.style.display = 'none'
-    integrityAccDetails3.style.display = 'none'
-    transactDetails.style.display = 'initial'
 })
 

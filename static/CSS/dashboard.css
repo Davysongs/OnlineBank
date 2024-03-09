@@ -93,8 +93,8 @@ nav .fas{
     margin-bottom: 40px;
 }
 .circular-container {
-    width: 80px; /* Adjust as needed */
-    height: 80px; /* Adjust as needed */
+    width: 60px; /* Adjust as needed */
+    height: 60px; /* Adjust as needed */
     border-radius: 50%; /* Creates a circular shape */
     overflow: hidden; /* Ensures content doesn't overflow the circular container */
     border: 2px solid #ccc; /* Optional: Add border */

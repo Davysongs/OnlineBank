@@ -20,6 +20,11 @@
                     <span class="nav-item">TOP-CHOICE BANK</span>
                 </a></li>
                 
+                <li><a href="{% url 'dashboard' %}#" id="side-button-1">
+                    <i class="fas fa-wallet"></i>
+                    <span class="nav-item">Wallet</span>
+                </a></li>
+
                 <li><a href="{% url 'dashboard' %}#" id="side-button-2">
                     <i class="fas fa-exchange"></i>
                     <span class="nav-item">Transfer</span>
@@ -35,11 +40,6 @@
                     <span class="nav-item">Withdraw</span>
                 </a></li>
 
-                <li><a href="{% url 'dashboard' %}#" id="side-button-1">
-                    <i class="fas fa-wallet"></i>
-                    <span class="nav-item">Balance</span>
-                </a></li>
-
                 <li><a href="{% url 'logout' %}" class="logout" id="logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <span class="nav-item">Logout</span>
@@ -52,20 +52,23 @@
         </div>
         <section class="main">
             <div class="main-top">
-                <div class="circular-container">
-                    {% if context.image %}
-                    <img src="{{ context.image.url }}" alt="Profile"/>
-                    {% else %}
-                    <img src="{% static 'img/icon.jpg' %}" alt="Profile"/>
-                    {% endif %}
-                </div>
+                <a href="{% url 'profile' %}">
+                    <div class="circular-container">
+                        {% if context.image %}
+                        <img src="{{ context.image.url }}" alt="Profile"/>
+                        {% else %}
+                        <img src="{% static 'img/icon.jpg' %}" alt="Profile"/>
+                        {% endif %}
+                    </div>
+                </a>
                 <h2>Hey, <span id="name">{{ context.nickname }}</span></h2>
-                <a href="{% url 'profile' %}"><i class="fas fa-user-cog"></i></a>
                 <h3 id="balance-display">Balance: 
-                    <span id="balance-value">&#x20A6;100,000</span>
+                    &#x20A6;<span id="balance-value">{{ context.balance }}</span>
                     <span id="hidden"> **** </span>
-                    <i id="show-balance" class="fas fa-eye open-eye"></i>
-                    <i id="hide-balance" class="fas fa-eye-slash close-eye" style="display: none;"></i>
+                    <span  style="font-size: .8em;">
+                        <i id="show-balance" class="fas fa-eye open-eye"></i>
+                        <i id="hide-balance" class="fas fa-eye-slash close-eye" style="display: none;"></i>
+                    </span>
                 </h3>
                 
             </div>
@@ -73,8 +76,8 @@
             <div class="cards">
                 <div class="card-details">
                     <i class="fas fa-wallet"></i>
-                    <h2>Balance</h2>
-                    <p>Check balance here</p>
+                    <h2>Wallet</h2>
+                    <p>Check your available currencies</p>
                     <a href="#top" id="button-1"><button type="button" id="button-1">CHECK</button></a>
 
                     <div class="popup" id="popup-balance">
