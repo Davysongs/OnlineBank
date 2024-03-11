@@ -4,9 +4,10 @@ from django.contrib import messages
 from login_required import login_not_required
 from accounts.forms import SignUpForm
 from .forms import UserForm
-from django.http import HttpResponseRedirect
 from base.middlewares import CustomException
 from accounts.models import Account
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 
 # Create your views here.
@@ -47,9 +48,7 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
-from django.shortcuts import render, redirect
-from .models import Account
-from .forms import UserForm
+
 
 def profile(request):
     user = request.user
@@ -63,19 +62,42 @@ def profile(request):
     if request.method == "GET":
         form = UserForm(instance=details)  # Populate form with existing data
         if details.pin:
-            return render(request, 'profile.html', {'details': details, 'form': form})
+            return render(request, 'update.html', {'details': details, 'form': form})
         else:
             return render(request, 'update.html', {'form': form})
 
     elif request.method == 'POST':
-        form = UserForm(request.POST, request.FILES, instance=details)
-        if form.is_valid():
-            form.save()
-            # Add a success message to provide feedback to the user
-            messages.success(request, 'Profile updated successfully.')
-            return redirect('dashboard')
+        if request.is_ajax():
+            nickname = request.POST.get('nickname')
+            image = request.FILES.get('image')
+            user = request.user
+            
+            try:
+                # Get or create the Account object for the user
+                account = Account.objects.get_or_create(user=user)
+                
+                # Update the Account object with the received data
+                account.nickname = nickname
+                account.image = image
+                account.save()
+                
+                # Return a success response
+                return JsonResponse({'message': 'Data saved successfully'}, status=200)
+            except Exception as e:
+                # Return an error response if an exception occurs
+                return JsonResponse({'error': str(e)}, status=500)
+            
         else:
-            # Form is not valid, handle the error scenario by rendering the form with errors
-            return render(request, 'update.html', {'details': details, 'form': form})
+            form = UserForm(request.POST, request.FILES, instance=details)
+            if form.is_valid():
+                form.save()
+                # Add a success message to provide feedback to the user
+                messages.success(request, 'Profile updated successfully.')
+                return redirect('dashboard')
+            else:
+                # Form is not valid, handle the error scenario by rendering the form with errors
+                return render(request, 'update.html', {'details': details, 'form': form})
+
+
 
 

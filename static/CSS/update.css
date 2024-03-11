@@ -12,7 +12,28 @@ body {
     border: 1px solid #ccc;
     border-radius: 8px;
 }
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+.logo a{
+    text-decoration: none;
+}
 
+.logo:hover{
+    cursor: pointer;
+}
+
+.logo img{
+    width: 60px;
+}
+
+.logo h2{
+    font-size: 25px;
+    color: var(--white-color);
+}
 .input-group {
     margin-bottom: 20px;
 }

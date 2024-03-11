@@ -10,72 +10,89 @@
     <link rel="stylesheet" href="{% static 'css/update.css' %}">
 </head>
 <body>
-
-<div class="container">
-    <h2>User Information Form</h2>
-    <form method="POST"  id="form">
-        {% csrf_token %}
-        <span id="form-error" class="error-message"></span>
-        <div id="upload-container">
-            <input type="file" name="image" id="image-upload" accept="image/*,.jpg,.png" >
-            <div id="image-preview">
-                <!-- Image preview will be displayed here -->
+    <div class="container">
+        <div class="logo">
+            <a href="{% url 'dashboard' %}"><img src="{% static 'Img/logo.png' %}" alt="Logo"></a> 
+            <a href="{% url 'dashboard' %}"><h2>Top-Choice Bank</h2></a>
+        </div>
+        <h2>User Information Form</h2>
+        <form method="POST"  id="form">
+            {% csrf_token %}
+            <span id="form-error" class="error-message"></span>
+            <div id="upload-container">
+                <input type="file" name="image" id="image-upload" accept="image/*,.jpg,.png">
+                <div id="image-preview">
+                    <!-- Image preview will be displayed here -->
+                </div>
+                {% if details %}
+                <button class="btn btn-outline-secondary" type="button" id="editNickname">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+                {% endif %}
+                <span id="upload-error" class="error-message"></span>
             </div>
-            <span id="upload-error" class="error-message"></span>
-        </div>
-        <div class="input-group">
-            <label for="nickname">Nickname</label><br>
-            <input type="text" name="nickname" id="nickname" placeholder="Enter within 30 characters" required>
-        </div>
-        <div class="input-group">
-            <label for="phone">Phone</label><br>
-            <input type="tel" name="phone" id="phone" maxlength="13" placeholder= "ex: 070123456789" required >
-            <span id="phone-error" class="error-message"></span>
-        </div>
-        <div class="input-group">
-            <label for="address">Address</label><br>
-            <input type="text" name="address" placeholder="Residental address" id="address" required>
-        </div>
-        <div class="input-group">
-            <label for="country">Country</label><br>
-            <input type="text" name="country" placeholder="Nationality" id="country" required>
-        </div>
-        <div class="input-group">
-            <label for="state">State</label><br>
-            <input type="text" name="state" placeholder="State of residence" id="state" required>
-        </div>
-        <div class="input-group">
-            <label for="city">City</label><br>
-            <input type="text" name="city" placeholder="City of residence" id="city" required>
-        </div>
-        <div class="input-group">
-            <label for="postcode">Postcode</label><br>
-            <input type="text" name="postcode" autocomplete="off" id="postcode" required>
-        </div>
-        <div class="input-group">
-            <label for="pin">PIN</label><small> 4-digit PIN for transaction verification.</small><br>
-            <span id="pin-error" class="error-message"></span><br>
-            <input type="password" name="pin" id="pin" maxlength="4" minlength="4" autocomplete="off" required>
-        </div>
-        <div class="input-group">
-            <label for="pin2">Confirm PIN</label><br>
-            <input type="password" name="pin2" id="pin2" maxlength="4" minlength="4" autocomplete="off" required>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
+            <div class="input-group">
+                <label for="nickname">Nickname</label><br>
+                <input type="text" name="nickname" id="nickname" placeholder="Enter within 30 characters" required {% if details %} value="{{ details.nickname }}" readonly {% endif %}>
+                {% if details %}
+                <button class="btn btn-outline-secondary" type="button" id="editNickname">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+                {% endif %}
+            </div>
+            <div class="input-group">
+                <label for="phone">Phone</label><br>
+                <input type="tel" name="phone" id="phone" maxlength="13" placeholder= "ex: 070123456789" required  {% if details %} value="{{ details.phone }}" readonly{% endif %} >
+                <span id="phone-error" class="error-message"></span>
+            </div>
+            <div class="input-group">
+                <label for="address">Address</label><br>
+                <input type="text" name="address" placeholder="Residental address" id="address" required  {% if details %} value="{{ details.address }}" readonly {% endif %}>
+            </div>
+            <div class="input-group">
+                <label for="country">Country</label><br>
+                <input type="text" name="country" placeholder="Nationality" id="country" required  {% if details %} value="{{ details.country }}" readonly {% endif %}>
+            </div>
+            <div class="input-group">
+                <label for="state">State</label><br>
+                <input type="text" name="state" placeholder="State of residence" id="state" required  {% if details %} value=" {{ details.state }}" readonly {% endif %}>
+            </div>
+            <div class="input-group">
+                <label for="city">City</label><br>
+                <input type="text" name="city" placeholder="City of residence" id="city" required  {% if details %} value="{{ details.city }}" readonly {% endif %}>
+            </div>
+            <div class="input-group">
+                <label for="postcode">Postcode</label><br>
+                <input type="text" name="postcode" autocomplete="off" id="postcode" required  {% if details %} value="{{ details.postcode }}" readonly {% endif %}>
+            </div>
+            <div class="input-group" {% if details %} style ="display:none;"{% endif %} >
+                <label for="pin">PIN</label><small> 4-digit PIN for transaction verification.</small><br>
+                <span id="pin-error" class="error-message"></span><br>
+                <input type="password" name="pin" id="pin" maxlength="4" minlength="4" autocomplete="off" required>
+            </div>
+            <div class="input-group" {% if details %} style ="display:none;"{% endif %}>
+                <label for="pin2">Confirm PIN</label><br>
+                <input type="password" name="pin2" id="pin2" maxlength="4" minlength="4" autocomplete="off" required>
+            </div>
+            <button type="submit" {% if details %} style="display: none;" {% endif %}>Submit</button>
+        </form>
 
 
-    {{ form.errors }}
-    {{ form.field.errors }}
+        {{ form.errors }}
+        {{ form.field.errors }}
 
-</div>
+    </div>
 
 </body>
 <script>
     const imageUpload = document.getElementById('image-upload');
     const imagePreview = document.getElementById('image-preview');
 
-    imagePreview.innerHTML = `<img id="default-image" src="{% static 'img/profile.gif' %}" alt="Default Image" width="500px" height"500px">`
+    imagePreview.innerHTML = `<img id="default-image" 
+    {% if details %} src="{{ details.image.url }}"
+    {% else %}
+        src="{% static 'img/profile.gif' %}" width="500px" height"500px"
+    {% endif %} alt="Default Image" >`
     const defaultImage = document.getElementById('upload-container');
     defaultImage.addEventListener('click', function() {
         imageUpload.click();
