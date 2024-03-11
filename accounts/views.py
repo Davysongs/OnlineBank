@@ -47,29 +47,35 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
+from django.shortcuts import render, redirect
+from .models import Account
+from .forms import UserForm
 
 def profile(request):
     user = request.user
     try:
         details = Account.objects.get(user=user)
     except Account.DoesNotExist:
-        raise CustomException("Your account is not configured properly")
+        # Handle the scenario where the user's account does not exist
+        # For example, redirect the user to a page to create their account
+        return redirect('create_account')
 
     if request.method == "GET":
-        form = UserForm()  # Create a form instance
-        if details.pin:  # Check if the user has a PIN
+        form = UserForm(instance=details)  # Populate form with existing data
+        if details.pin:
             return render(request, 'profile.html', {'details': details, 'form': form})
         else:
             return render(request, 'update.html', {'form': form})
 
     elif request.method == 'POST':
-        form = UserForm(request.POST, request.FILES, instance=details)  # Populate form with existing data
+        form = UserForm(request.POST, request.FILES, instance=details)
         if form.is_valid():
-            form.save()  # Save the form data
+            form.save()
+            # Add a success message to provide feedback to the user
+            messages.success(request, 'Profile updated successfully.')
             return redirect('dashboard')
         else:
-            # Form is not valid, handle the error scenario here
-            # You might want to render the profile page again with the form and error messages
-            # For example
+            # Form is not valid, handle the error scenario by rendering the form with errors
             return render(request, 'update.html', {'details': details, 'form': form})
+
 

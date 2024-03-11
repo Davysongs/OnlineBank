@@ -24,8 +24,8 @@
             <span id="upload-error" class="error-message"></span>
         </div>
         <div class="input-group">
-            <label for="address">Nickname</label><br>
-            <input type="text" name="Nickname" id="Nickname" placeholder="Enter within 30 characters" required>
+            <label for="nickname">Nickname</label><br>
+            <input type="text" name="nickname" id="nickname" placeholder="Enter within 30 characters" required>
         </div>
         <div class="input-group">
             <label for="phone">Phone</label><br>
@@ -63,6 +63,11 @@
         </div> -->
         <button type="submit">Submit</button>
     </form>
+
+
+    {{ form.errors }}
+    {{ form.field.errors }}
+
 </div>
 
 </body>
