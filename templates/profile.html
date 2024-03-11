@@ -9,6 +9,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <style>
+        
+        .logo{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
+        .logo a{
+            text-decoration: none;
+        }
+
+        .logo:hover{
+            cursor: pointer;
+        }
+
+        .logo img{
+            width: 60px;
+        }
+
+        .logo h2{
+            font-size: 25px;
+            color: var(--white-color);
+        }
         #circular-container {
             width: 120px; /* Adjust as needed */
             height: 120px; /* Adjust as needed */
@@ -22,9 +45,29 @@
             height: auto; /* Maintains aspect ratio */
             display: block; /* Prevents extra space at the bottom */
         }
+        #submitBtn {
+            display: none;
+            left: 50%;
+            position: relative;
+            transform: translate(-50%, -50%);
+            background-color: #5c5edd;; /* Blue color */
+            color: #fff; /* White color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        #submitBtn:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
     </style>
 </head>
 <body>
+    <div class="logo">
+        <a href="/"><img src="{% static 'Img/logo.png' %}" alt="Logo"></a> 
+        <a href="/"><h2>Top-Choice Bank</h2></a>
+    </div>
     <div class="container mt-5">
         <h2>Form Data Display</h2>
         <div class="row mt-3">
