@@ -107,3 +107,12 @@ button[type="submit"] {
     font-size: 14px; 
     margin-top: 5px; 
 }
+.image-container {
+    position: relative;
+}
+
+#editimage {
+    position: absolute;
+    bottom: 10px; /* Adjust as needed */
+    right: 340px; /* Adjust as needed */
+}

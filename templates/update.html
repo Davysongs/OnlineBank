@@ -15,22 +15,21 @@
             <a href="{% url 'dashboard' %}"><img src="{% static 'Img/logo.png' %}" alt="Logo"></a> 
             <a href="{% url 'dashboard' %}"><h2>Top-Choice Bank</h2></a>
         </div>
-        <h2>User Information Form</h2>
         <form method="POST"  id="form">
             {% csrf_token %}
             <span id="form-error" class="error-message"></span>
             <div id="upload-container">
                 <input type="file" name="image" id="image-upload" accept="image/*,.jpg,.png">
-                <div id="image-preview">
-                    <!-- Image preview will be displayed here -->
+                <div class="image-container">
+                    <div id="image-preview">
+                        <!-- Image preview will be displayed here -->
+                    </div>
+                    <button class="btn btn-outline-secondary" type="button" id="editimage">
+                        <i class="fas fa-camera"></i>
+                    </button>
                 </div>
-                {% if details %}
-                <button class="btn btn-outline-secondary" type="button" id="editNickname">
-                    <i class="fas fa-pencil-alt"></i>
-                </button>
-                {% endif %}
                 <span id="upload-error" class="error-message"></span>
-            </div>
+            </div>            
             <div class="input-group">
                 <label for="nickname">Nickname</label><br>
                 <input type="text" name="nickname" id="nickname" placeholder="Enter within 30 characters" required {% if details %} value="{{ details.nickname }}" readonly {% endif %}>
@@ -89,7 +88,7 @@
     const imagePreview = document.getElementById('image-preview');
 
     imagePreview.innerHTML = `<img id="default-image" 
-    {% if details %} src="{{ details.image.url }}"
+    {% if details.image %} src="{{ details.image.url }}"
     {% else %}
         src="{% static 'img/profile.gif' %}" width="500px" height"500px"
     {% endif %} alt="Default Image" >`

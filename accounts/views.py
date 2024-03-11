@@ -7,7 +7,6 @@ from .forms import UserForm
 from base.middlewares import CustomException
 from accounts.models import Account
 from django.http import JsonResponse
-from django.views.decorators.http import require_POST
 
 
 # Create your views here.
@@ -55,9 +54,7 @@ def profile(request):
     try:
         details = Account.objects.get(user=user)
     except Account.DoesNotExist:
-        # Handle the scenario where the user's account does not exist
-        # For example, redirect the user to a page to create their account
-        return redirect('create_account')
+        return CustomException("Your account isnt properly configured. See an Admin")
 
     if request.method == "GET":
         form = UserForm(instance=details)  # Populate form with existing data
@@ -92,7 +89,7 @@ def profile(request):
             if form.is_valid():
                 form.save()
                 # Add a success message to provide feedback to the user
-                messages.success(request, 'Profile updated successfully.')
+                #messages.success(request, 'Profile updated successfully.')
                 return redirect('dashboard')
             else:
                 # Form is not valid, handle the error scenario by rendering the form with errors
