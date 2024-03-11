@@ -1,11 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Data Display</title>
+    <title>{{ details.nickname }} - Profile</title>
+    <link rel="icon" href="{% static 'Img/t.svg' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <style>
+        #circular-container {
+            width: 120px; /* Adjust as needed */
+            height: 120px; /* Adjust as needed */
+            border-radius: 50%; /* Creates a circular shape */
+            overflow: hidden; /* Ensures content doesn't overflow the circular container */
+            border: 2px solid #ccc; /* Optional: Add border */
+        }
+
+        #circular-container img {
+            width: 100%; /* Ensures the image fills the container */
+            height: auto; /* Maintains aspect ratio */
+            display: block; /* Prevents extra space at the bottom */
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -17,7 +34,7 @@
                     <li class="list-group-item">
                         <strong>Nickname:</strong>
                         <div class="input-group">
-                            <input type="text" name="fieldname" value="{{ details.nickname }}" class="form-control" readonly>
+                            <input type="text" name="nickname" value="{{ details.nickname }}" class="form-control" readonly>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" id="editNickname">
                                     <i class="fas fa-pencil-alt"></i>
@@ -37,41 +54,19 @@
             </div>
             <div class="col-md-6">
                 <h4>Image</h4>
-                <div class="card">
+                <div id="circular-container" class="card">
                     <img src="{{ details.image.url }}" class="card-img-top" alt="Image Preview">
                     <div class="card-body">
-                        <button class="btn btn-primary" id="editImageBtn"><i class="fas fa-camera"></i></button>
                         <input type="file" id="imageInput" style="display: none;" accept="image/*">
                     </div>
                 </div>
+                <button class="btn btn-primary" id="editImageBtn"><i class="fas fa-camera"></i></button>
             </div>
             
         </div>
-    </div>    
+    </div> 
+    <button id="submitBtn" style="display: none;">Submit Changes</button>
+   
 </body>
-<script>
-    document.getElementById('editNickname').addEventListener('click', function() {
-        var nicknameInput = document.querySelector('input[name="nickname"]');
-        nicknameInput.readOnly = !nicknameInput.readOnly; // Toggle readonly attribute
-        nicknameInput.focus(); // Focus on the input field after making it editable
-    });
-    document.getElementById('editImageBtn').addEventListener('click', function() {
-    document.getElementById('imageInput').click();
-});
-
-    document.getElementById('imageInput').addEventListener('change', function() {
-        // Here you can handle the selected image file
-        // For example, you can use FormData to send the file to the server via AJAX
-        // Or you can display the selected image preview on the page
-        const selectedFile = this.files[0];
-        if (selectedFile) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const imgPreview = document.querySelector('.card-img-top');
-                imgPreview.src = event.target.result;
-            };
-            reader.readAsDataURL(selectedFile);
-        }
-    });
-</script>
+<script src="{% static 'scripts/profile.js' %}"></script>
 </html>
