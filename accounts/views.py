@@ -7,6 +7,8 @@ from .forms import UserForm
 from base.middlewares import CustomException
 from accounts.models import Account
 from django.http import JsonResponse
+from custom_user.models import User
+from django.core.mail import EmailMessage
 
 
 # Create your views here.
@@ -32,14 +34,35 @@ def register_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            email = form.cleaned_data.get('email')
+            if User.objects.filter(email=email).exists():
+                messages.warning(request, 'Email already exists! Please login instead of registration.')
+                return render(request, 'register.html', {'form': form})
+            user = User.objects.create_user(email=email, password=form.cleaned_data.get('password1'),
+                                            last_name = form.cleaned_data.get('last_name'),
+                                              first_name = form.cleaned_data.get('first_name'))
+            user.is_active= False
+            subject = "[TOPCHOICEBANK] Verify your email"
+            body = "You linked up your Email to TOP CHOICE BANK APP successfully"
+            email = EmailMessage(
+                subject,
+                body,
+                "no-reply@topchoicebank.com",
+                [email]
+            )        
+            email.send(fail_silently=False)
             condition = True
             return render(request, "register.html", {'condition': condition})
+        else:
+            # Handle form errors 
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+            return render(request, "register.html", {"form": form})
 
-    
     if request.method == "GET":
         form = SignUpForm()
-        return render(request, "register.html", {"form" : form})
+        return render(request, "register.html", {"form": form})
 
 
 #Logout
